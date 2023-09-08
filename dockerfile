@@ -4,8 +4,15 @@ FROM golang:1.21-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Go application source code to the container
-COPY app .
+# Install Git to clone the GitHub repository
+RUN apt-get update && apt-get install -y git
+
+# Clone your Go application repository
+RUN git clone https://github.com/obiMadu/hngX-stage1.git .
+
+# Build the Go application (assuming it's in the current directory)
+RUN export GO111MODULE=auto
+RUN go build -o app
 
 # Expose port 8080 for the web application to listen on
 EXPOSE 80
