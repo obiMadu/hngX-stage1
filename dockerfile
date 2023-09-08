@@ -11,7 +11,8 @@ RUN apk update && apk add --no-cache git
 RUN git clone https://github.com/obiMadu/hngX-stage1.git .
 
 # Build the Go application (assuming it's in the current directory)
-RUN export GO111MODULE=auto
+ENV GO111MODULE=auto
+#RUN export GO111MODULE=auto
 RUN go build -o app
 
 # Expose port 8080 for the web application to listen on
