@@ -11,4 +11,4 @@ COPY ./apiServer .
 EXPOSE 80
 
 # Command to run the Go web application
-CMD ["./apiServer"]
+CMD ["/app/apiServer"]
