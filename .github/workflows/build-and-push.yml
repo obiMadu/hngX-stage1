@@ -20,6 +20,7 @@ jobs:
 
       - name: Build Go application
         run: |
+          export GO111MODULE=auto
           go build -o apiServer
         working-directory: .
 

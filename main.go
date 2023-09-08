@@ -8,7 +8,7 @@ import (
 
 func main() {
 	http.HandleFunc("/api", handlerFunc)
-	listenPort := ":8080"
+	listenPort := ":80"
 	http.ListenAndServe(listenPort, nil)
 }
 
