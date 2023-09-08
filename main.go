@@ -1,12 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http"
+	"time"
 )
 
 func main() {
 	http.HandleFunc("/api", handlerFunc)
-	listenPort := ":80"
+	listenPort := ":8080"
 	http.ListenAndServe(listenPort, nil)
 }
 
@@ -17,20 +19,33 @@ func handlerFunc(w http.ResponseWriter, r *http.Request) {
 	track := url.Get("track")
 
 	// Configure response variables
-	current_day := ""
-	utc_time := ""
-	github_file_url := ""
-	github_repo_url := ""
+	utc_time := time.Now().UTC()
+	current_day := utc_time.Weekday().String()
+	github_file_url := "https://github.com/obiMadu/hngX-stage1/blob/2dde12e9795fa1a3858086b169aea0d804c17018/main.go"
+	github_repo_url := "https://github.com/obiMadu/hngX-stage1"
 	status_code := 200
 
 	// Create a JSON response
 	response := map[string]interface{}{
 		"slack_name":      slack_name,
-		"track":           track,
 		"current_day":     current_day,
 		"utc_time":        utc_time,
+		"track":           track,
 		"github_file_url": github_file_url,
 		"github_repo_url": github_repo_url,
 		"status_code":     status_code,
 	}
+
+	// Convert the response to JSON
+	jsonResponse, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Set the Content-Type header
+	w.Header().Set("Content-Type", "application/json")
+
+	// Write the JSON response to the client
+	w.Write(jsonResponse)
 }
