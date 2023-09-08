@@ -5,10 +5,10 @@ FROM golang:1.21-alpine
 WORKDIR /app
 
 # Copy the Go application source code to the container
-COPY ./apiServer .
+COPY app .
 
 # Expose port 8080 for the web application to listen on
 EXPOSE 80
 
 # Command to run the Go web application
-CMD ["/app/apiServer"]
+CMD ["./app"]

@@ -21,7 +21,7 @@ jobs:
       - name: Build Go application
         run: |
           export GO111MODULE=auto
-          go build -o apiServer
+          go build -o app
         working-directory: .
 
       - name: Login to Azure
