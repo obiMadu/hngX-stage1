@@ -19,8 +19,8 @@ func handlerFunc(w http.ResponseWriter, r *http.Request) {
 	track := url.Get("track")
 
 	// Configure response variables
-	utc_time := time.Now().UTC()
-	current_day := utc_time.Weekday().String()
+	utc_time := time.Now().UTC().Format("2006-01-02T15:04:05Z")
+	current_day := time.Now().Weekday().String()
 	github_file_url := "https://github.com/obiMadu/hngX-stage1/blob/2dde12e9795fa1a3858086b169aea0d804c17018/main.go"
 	github_repo_url := "https://github.com/obiMadu/hngX-stage1"
 	status_code := 200
