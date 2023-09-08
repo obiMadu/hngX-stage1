@@ -5,7 +5,7 @@ FROM golang:1.21-alpine
 WORKDIR /app
 
 # Install Git to clone the GitHub repository
-RUN apt-get update && apt-get install -y git
+RUN apk update && apk add --no-cache git
 
 # Clone your Go application repository
 RUN git clone https://github.com/obiMadu/hngX-stage1.git .
